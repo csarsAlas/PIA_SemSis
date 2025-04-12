@@ -25,7 +25,6 @@ document.getElementById('startButton').addEventListener('click', function () {
     respuestasUsuario = [];
     mostrarPregunta();
 });
-
 function mostrarPregunta() {
     const preguntaElement = document.getElementById('pregunta');
     const respuestasElement = document.getElementById('respuestas');
@@ -33,12 +32,37 @@ function mostrarPregunta() {
     if (indicePreguntaActual < PSS10.length) {
         preguntaElement.textContent = PSS10[indicePreguntaActual].question;
         respuestasElement.innerHTML = `
-            <input type="radio" name="respuesta" value="0"> 0 - Nunca<br>
-            <input type="radio" name="respuesta" value="1"> 1 - Casi Nunca<br>
-            <input type="radio" name="respuesta" value="2"> 2 - A veces<br>
-            <input type="radio" name="respuesta" value="3"> 3 - Frecuentemente<br>
-            <input type="radio" name="respuesta" value="4"> 4 - Muy Frecuentemente<br>
-            <button type="button" onclick="manejarRespuesta()">Siguiente</button>
+            <div class="respuesta-item">
+                <label>
+                    <input type="radio" name="respuesta" value="0">
+                    <span>0 - Nunca</span>
+                </label>
+            </div>
+            <div class="respuesta-item">
+                <label>
+                    <input type="radio" name="respuesta" value="1">
+                    <span>1 - Casi Nunca</span>
+                </label>
+            </div>
+            <div class="respuesta-item">
+                <label>
+                    <input type="radio" name="respuesta" value="2">
+                    <span>2 - A veces</span>
+                </label>
+            </div>
+            <div class="respuesta-item">
+                <label>
+                    <input type="radio" name="respuesta" value="3">
+                    <span>3 - Frecuentemente</span>
+                </label>
+            </div>
+            <div class="respuesta-item">
+                <label>
+                    <input type="radio" name="respuesta" value="4">
+                    <span>4 - Muy Frecuentemente</span>
+                </label>
+            </div>
+            <button type="button" onclick="manejarRespuesta()" class="boton-siguiente">Siguiente</button>
         `;
     }
 }
@@ -70,7 +94,7 @@ function manejarRespuesta() {
 }
 
 function mostrarResultados() {
-    // for para cambiar el valor de las preguntas positivas del test 
+    // Inversión de ítems positivos
     for (let i of itemsInvertidos) {
         respuestasUsuario[i] = 4 - respuestasUsuario[i];
     }
@@ -78,22 +102,47 @@ function mostrarResultados() {
     const total = respuestasUsuario.reduce((a, b) => a + b, 0);
 
     let nivelEstres = "";
+    let mensajeDetallado = "";
+    let recomendacion = "";
+
     if (total <= 13) {
         nivelEstres = "Bajo";
+        mensajeDetallado = "¡Excelente! Manejas bien las situaciones estresantes.";
+        recomendacion = "Sigue manteniendo tus buenos hábitos de manejo del estrés.";
     } else if (total <= 26) {
         nivelEstres = "Moderado";
+        mensajeDetallado = "Experimentas un nivel de estrés dentro del rango promedio.";
+        recomendacion = "Podrías beneficiarte de técnicas de relajación y mejor organización.";
     } else {
         nivelEstres = "Alto";
+        mensajeDetallado = "Tu nivel de estrés es significativamente elevado.";
+        recomendacion = "Recomendamos buscar apoyo profesional y practicar técnicas de manejo del estrés.";
     }
 
-     //Impresion de los resultados, se imprime el nivel de estres y el puntaje total
     document.getElementById('quizContainer').innerHTML = '';
     document.getElementById('resultado').innerHTML = `
-        <h2>Tu nivel de estrés es: ${nivelEstres}</h2>
-        <p>Puntaje total: ${total} / 40</p>
+        <div class="resultado-container">
+            <h2>Resultados del Test de Estrés PSS-10</h2>
+            <div class="nivel-estres ${nivelEstres.toLowerCase()}">
+                <p>Nivel de estrés: <strong>${nivelEstres}</strong></p>
+                <p>Puntaje total: ${total} / 40</p>
+            </div>
+            <div class="mensaje-detallado">
+                <p>${mensajeDetallado}</p>
+                <p>${recomendacion}</p>
+            </div>
+            <div class="interpretacion">
+                <h3>¿Qué significa este resultado?</h3>
+                <p>La escala PSS-10 mide qué tan estresantes evalúas tus situaciones de vida:</p>
+                <ul>
+                    <li><strong>0-13:</strong> Bajo estrés percibido</li>
+                    <li><strong>14-26:</strong> Estrés moderado</li>
+                    <li><strong>27-40:</strong> Alto estrés percibido</li>
+                </ul>
+            </div>
+        </div>
     `;
 }
-
 
 //Pregnutas personalizadas para recomendaciones.
 

@@ -190,3 +190,19 @@ h1 {
 .boton-siguiente:active {
     background-color: #FF8C00; 
 }
+
+#preguntaPers {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #083638;
+  }
+  
+  #respuestasPers {
+    margin: 20px 0;
+    text-align: left;
+    padding: 10px;
+    font-size: 24px;
+    color: #283F52;
+  }
+

@@ -3,20 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>pia_SemSis</title>
+    <title>Test de Estrés PSS-10</title>
     <link rel="stylesheet" href="Estilos_PIA/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Test de Estrés</h1>
-    <h2></h2>
-    <form id="quizForm">
-        <div id="quizContainer">
-            <div id="pregunta"></div>
-            <div id="respuestas"></div>
-        </div>
-        <button type="button" id="startButton">Iniciar Test</button>
-    </form>
-    <div id="resultado"></div>
+    <div class="container">
+        <header>
+            <h1>Test de Estrés Percibido</h1>
+            <p class="subtitle">Evalúa tu nivel de estrés</p>
+        </header>
+
+        <main>
+            <section class="intro-section">
+                <div class="info-card">
+                    <h2>Instrucciones</h2>
+                    <ol>
+                        <li>Responde con sinceridad según cómo te hayas sentido en el último mes</li>
+                        <li>No hay respuestas correctas o incorrectas</li>
+                        <li>El test toma aproximadamente 3-5 minutos</li>
+                    </ol>
+                </div>
+            </section>
+
+            <div class="test-container" id="quizForm">
+                <div id="quizContainer">
+                    <div class="ready-message">
+                        <h3>¿Estás listo para comenzar?</h3>
+                        <p>Haz clic en el botón para iniciar el test</p>
+                    </div>
+                    <div id="pregunta" class="question-box"></div>
+                    <div id="respuestas" class="answers-box"></div>
+                </div>
+                <button type="button" id="startButton" class="start-btn">Iniciar Test</button>
+            </div>
+        </main>
+    </div>
+
+    <div id="resultado" class="results-container"></div>
+
+    <div class="test-container" id="personalContainer">
+        <div id="preguntaPers" class="question-box"></div>
+        <div id="respuestasPers" class="answers-box"></div>
+      </div>
+      
 
     <script src="Preguntas.js"></script>
 </body>
